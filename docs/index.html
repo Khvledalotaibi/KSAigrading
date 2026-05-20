@@ -18,33 +18,55 @@
             line-height: 1.6;
         }
 
-        /* Saudi Flag Strip */
+        /* Saudi Flag Strip at Top */
         .flag-strip {
             height: 8px;
             background: linear-gradient(90deg, #0a6b3a 0%, #0a6b3a 33%, #ffffff 33%, #ffffff 66%, #0a6b3a 66%, #0a6b3a 100%);
         }
 
-        /* Hero Section with Al-Diriyah Mast */
+        /* Hero Section with Al-Diriyah Mast Background */
         .hero {
-            background: linear-gradient(rgba(10, 107, 58, 0.92), rgba(10, 107, 58, 0.85)), 
-                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect width="1200" height="400" fill="%230a6b3a"/><path d="M0 400 L1200 300 L1200 400 Z" fill="%23c9a03d" opacity="0.3"/><circle cx="600" cy="100" r="80" fill="none" stroke="%23c9a03d" stroke-width="2" opacity="0.4"/><line x1="600" y1="180" x2="600" y2="350" stroke="%23c9a03d" stroke-width="4" opacity="0.5"/><path d="M560 350 L640 350" stroke="%23c9a03d" stroke-width="3" opacity="0.5"/></svg>');
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.55)),
+                        url('https://raw.githubusercontent.com/khvledalotaibi/KSAigrading/main/docs/saryah.png');
             background-size: cover;
-            background-position: center;
+            background-position: center 30%;
             color: white;
             text-align: center;
-            padding: 80px 20px;
+            padding: 100px 20px;
             position: relative;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        /* Fallback if image not found - Saudi flag colors */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0a6b3a 0%, #0a6b3a 40%, #ffffff 40%, #ffffff 60%, #0a6b3a 60%, #0a6b3a 100%);
+            opacity: 0;
+            z-index: -1;
         }
 
-        .hero h1 span {
-            color: #ffd700;
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+
+        /* White for KSA and Grading, Green for I */
+        .hero h1 .white-part {
+            color: white;
+        }
+        
+        .hero h1 .green-i {
+            color: #0a6b3a;
+            text-shadow: 0 0 8px rgba(10,107,58,0.6);
+            font-size: 4.2rem;
+            display: inline-block;
         }
 
         .hero p {
@@ -52,16 +74,18 @@
             max-width: 800px;
             margin: 0 auto 30px;
             opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         .hero-badge {
             display: inline-block;
-            background: rgba(255,215,0,0.2);
-            border: 1px solid #ffd700;
+            background: rgba(10,107,58,0.85);
+            border: 1px solid #c9a03d;
             border-radius: 50px;
             padding: 8px 20px;
             font-size: 0.9rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
         }
 
         /* Container */
@@ -113,6 +137,7 @@
             padding: 25px;
             background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
             border-radius: 16px;
+            border-bottom: 3px solid #c9a03d;
         }
 
         .stat-number {
@@ -158,6 +183,11 @@
             color: #1a2a1a;
         }
 
+        .btn-gold:hover {
+            background: #b38f2e;
+            transform: scale(1.05);
+        }
+
         .btn:hover {
             transform: scale(1.05);
             background: #0d7e47;
@@ -179,8 +209,12 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero h1 .green-i { font-size: 2.4rem; }
+            .hero p { font-size: 1rem; }
             .section-card { padding: 20px; }
+            .section-title { font-size: 1.4rem; }
+            .stat-number { font-size: 2rem; }
         }
     </style>
 </head>
@@ -189,9 +223,13 @@
 
     <div class="hero">
         <div class="hero-badge">🇸🇦 مبادرة بحثية سعودية | Saudi Research Initiative</div>
-        <h1>KSA<span>IGrading</span></h1>
+        <h1>
+            <span class="white-part">KSA</span>
+            <span class="green-i">I</span>
+            <span class="white-part">Grading</span>
+        </h1>
         <p>تقييم آلي للامتحانات الجامعية باستخدام الذكاء الاصطناعي<br>Automated AI-Powered Exam Grading for Saudi Universities</p>
-        <a href="#research" class="btn btn-gold" style="background:#c9a03d; color:#1a2a1a;">📄 استكشف البحث | Explore Research</a>
+        <a href="#research" class="btn btn-gold">📄 استكشف البحث | Explore Research</a>
     </div>
 
     <div class="container">
@@ -242,29 +280,29 @@
         <div class="section-card">
             <h2 class="section-title">المصدر المفتوح | Open Source</h2>
             <p>جميع الأكواد والنتائج متاحة للعموم لإعادة الإنتاج والتطوير:</p>
-            <pre>git clone https://github.com/yourusername/KSAIGrading.git
-cd KSAIGrading
+            <pre>git clone https://github.com/khvledalotaibi/KSAigrading.git
+cd KSAigrading
 pip install -r requirements.txt
 python grade_comparison.py</pre>
-            <a href="#" class="btn" style="margin-top: 15px;">🔗 GitHub Repository</a>
+            <a href="https://github.com/khvledalotaibi/KSAigrading" class="btn" style="margin-top: 15px;">🔗 GitHub Repository</a>
         </div>
 
         <!-- Citation -->
         <div class="section-card">
             <h2 class="section-title">الاستشهاد | Citation</h2>
             <pre style="font-size: 0.75rem;">@misc{ksaigrading2026,
-  author       = {Your Name},
+  author       = {Khvle Alotaibi},
   title        = {KSAIGrading: AI-Powered Exam Grading for Saudi Universities},
   year         = {2026},
   publisher    = {GitHub},
-  url          = {https://github.com/yourusername/KSAIGrading}
+  url          = {https://github.com/khvledalotaibi/KSAigrading}
 }</pre>
         </div>
     </div>
 
     <footer>
         <p>🇸🇦 مبادرة بحثية ضمن رؤية السعودية 2030 | A Research Initiative Aligned with Saudi Vision 2030</p>
-        <p>© 2026 KSAIGrading | <a href="https://github.com/khvledalotaibi/KSAIGrading">GitHub</a> | للاستخدام الأكاديمي فقط | For Academic Use Only</p>
+        <p>© 2026 KSAIGrading | <a href="https://github.com/khvledalotaibi/KSAigrading">GitHub</a> | للاستخدام الأكاديمي فقط | For Academic Use Only</p>
         <p style="margin-top: 15px; font-size: 0.7rem;">تصميم مستوحى من سارية الدرعية - رمز الوحدة الوطنية | Design inspired by the Al-Diriyah Mast - Symbol of National Unity</p>
     </footer>
 </body>
