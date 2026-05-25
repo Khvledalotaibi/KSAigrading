@@ -10,7 +10,6 @@ client = OpenAI(
     api_key=api_key
 )
 
-# Your exam question
 question = "List three types of computer memory."
 rubric = ["RAM", "ROM", "Cache"]
 student_answer = "RAM and ROM"
