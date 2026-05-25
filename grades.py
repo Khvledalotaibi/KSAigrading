@@ -12,7 +12,7 @@ with open("questions.txt", "r") as f:
 with open("answers.txt", "r") as f:
     answers = [line.strip() for line in f.readlines() if line.strip()]
 
-# Grade each
+
 correct = 0
 total = len(questions)
 
