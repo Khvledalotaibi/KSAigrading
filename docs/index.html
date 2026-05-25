@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KSAIGrading | AI Automated Exam Grading for Saudi Universities</title>
+    <title>KSAIGrading | AI Exam Grading for Saudi Universities</title>
     <style>
         * {
             margin: 0;
@@ -12,66 +12,45 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Tahoma', system-ui, -apple-system, sans-serif;
-            background: #ffffff;
-            color: #000000;
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: white;
+            color: black;
+            line-height: 1.5;
         }
 
-        /* Flag Strip at Top */
+        /* Saudi flag strip */
         .flag-strip {
-            height: 8px;
+            height: 6px;
             background: #0a6b3a;
         }
 
-        /* Hero Section with Mast Diriyah Background */
+        /* Hero section - Saudi flag colors as fallback, image on top */
         .hero {
-            background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.9)),
-                        url('https://raw.githubusercontent.com/khvledalotaibi/KSAigrading/main/docs/mast-diriyah.png');
+            background: linear-gradient(rgba(10, 107, 58, 0.1), rgba(255, 255, 255, 0.95)),
+                        url('mast-diriyah.png');
             background-size: cover;
-            background-position: center 40%;
+            background-position: center 30%;
             text-align: center;
-            padding: 120px 20px;
-            position: relative;
+            padding: 80px 20px;
         }
 
-        /* Fallback if image missing */
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #ffffff;
-            opacity: 0;
-            z-index: -1;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: #ffffff;
-            border: 2px solid #0a6b3a;
-            border-radius: 999px;
-            padding: 12px 28px;
-            font-size: 1rem;
-            margin-bottom: 45px;
-            color: #000000;
-            font-weight: 700;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        /* If image fails, show Saudi flag colors */
+        @supports (background: linear-gradient(0deg, white, white)) {
+            .hero {
+                background-color: #0a6b3a;
+                background-blend-mode: overlay;
+            }
         }
 
         .hero h1 {
-            font-size: 6rem;
-            margin-bottom: 25px;
+            font-size: 4rem;
             font-weight: 900;
-            letter-spacing: -2px;
-            line-height: 1;
+            letter-spacing: -1px;
         }
 
-        .hero h1 .gray-part {
-            color: #000000;
+        .hero h1 span:first-child,
+        .hero h1 span:last-child {
+            color: black;
         }
 
         .hero h1 .green-ai {
@@ -79,285 +58,140 @@
         }
 
         .hero p {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            color: #000000;
-            line-height: 1.8;
-            font-weight: 500;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 15px auto;
+            color: black;
         }
 
         .btn {
             display: inline-block;
-            background: #000000;
-            color: #ffffff;
-            padding: 16px 38px;
-            border-radius: 999px;
+            background: black;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-            margin: 5px;
+            font-weight: 600;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-green {
             background: #0a6b3a;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            opacity: 0.9;
-        }
-
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
 
-        /* Academic Sections */
-        .section-card {
-            background: #ffffff;
-            border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            transition: 0.3s ease;
-            border-top: 4px solid #0a6b3a;
-        }
-
-        .section-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: #0a6b3a;
-            font-weight: 700;
-            border-right: 4px solid #0a6b3a;
-            padding-right: 20px;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 25px;
-            background: #ffffff;
-            border-radius: 18px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #0a6b3a;
-        }
-
-        .stat-label {
-            color: #000000;
-            font-weight: 600;
-        }
-
-        /* Upload Section */
-        .upload-area {
-            border: 2px dashed #0a6b3a;
-            border-radius: 20px;
-            padding: 50px;
-            text-align: center;
+        /* Upload card */
+        .upload-card {
             background: #f9f9f9;
-            margin: 30px 0;
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            border: 2px dashed #0a6b3a;
         }
 
-        .upload-area input {
-            margin: 20px 0;
+        .upload-card input {
+            display: block;
+            width: 100%;
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
         }
 
-        pre {
-            background: #1e1e1e;
-            color: #e2e8f0;
+        .result-box {
+            background: #f0fdf4;
+            border-radius: 16px;
             padding: 20px;
-            border-radius: 12px;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            margin: 20px 0;
-            border-left: 4px solid #0a6b3a;
-        }
-
-        /* Citation */
-        .citation-box {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 12px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            border-right: 3px solid #0a6b3a;
+            margin-top: 20px;
+            display: none;
         }
 
         footer {
-            background: #000000;
-            color: #ffffff;
+            background: black;
+            color: white;
             text-align: center;
-            padding: 35px;
-            margin-top: 50px;
-            font-size: 0.85rem;
+            padding: 20px;
+            font-size: 0.8rem;
+            margin-top: 40px;
         }
 
         footer a {
             color: #0a6b3a;
-            text-decoration: none;
         }
 
-        @media (max-width: 768px) {
-            .hero { padding: 80px 20px; }
-            .hero h1 { font-size: 2.8rem; }
-            .hero p { font-size: 1rem; }
-            .section-card { padding: 25px; }
-            .section-title { font-size: 1.4rem; }
-            .stat-number { font-size: 2rem; }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero { padding: 50px 20px; }
+            .upload-card { padding: 20px; }
         }
     </style>
 </head>
 <body>
     <div class="flag-strip"></div>
 
-    <!-- Hero Section -->
     <div class="hero">
-        <div class="hero-badge">
-            🇸🇦 Saudi Scientific Research Initiative | مبادرة بحثية علمية سعودية
-        </div>
         <h1>
-            <span class="gray-part">KS</span>
+            <span>KS</span>
             <span class="green-ai">AI</span>
-            <span class="gray-part">Grading</span>
+            <span>Grading</span>
         </h1>
-        <p>
-            تقييم وتحليل آلي للاختبارات الجامعية باستخدام الذكاء الاصطناعي
-            <br>
-            Automated AI-Powered Exam Grading for Saudi Universities
-        </p>
-        <div>
-            <a href="#upload" class="btn btn-green">📤 Upload Exam Papers</a>
-            <a href="#research" class="btn">📄 Read Research Paper</a>
-        </div>
+        <p>تقييم آلي للاختبارات الجامعية<br>AI-Powered Exam Grading for Saudi Universities</p>
     </div>
 
     <div class="container">
-        <!-- Abstract Section -->
-        <section id="research" class="section-card">
-            <h2 class="section-title">📋 Abstract | الملخص</h2>
-            <p>This research investigates whether large language models (LLMs) can grade university exam answers with sufficient accuracy for Saudi higher education. Using Groq's Llama 3.3 70B model, we developed a grading system that compares student answers to correct answers and rubric expectations. On a mixed dataset of 24 questions (MCQ, calculations, lists, problem-solving), the system achieved <strong>95.8% accuracy</strong> with <strong>zero false positives</strong> and only <strong>one false negative</strong>. The method uses prompt engineering, synonym normalization, and heuristic rules for list matching. All code is open-source.</p>
-        </section>
+        <div class="upload-card">
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">📄 Upload Exam Files</p>
+            <input type="file" id="studentFile" accept=".txt,.csv">
+            <input type="file" id="expectedFile" accept=".txt,.csv">
+            <button class="btn btn-green" id="gradeBtn">Start Grading</button>
+            <div id="result" class="result-box"></div>
+            <p style="margin-top: 20px; font-size: 0.8rem;">Supported: .txt, .csv | PDF/OCR coming soon</p>
+        </div>
 
-        <!-- Problem Approach -->
-        <section class="section-card">
-            <h2 class="section-title">⚠️ Problem & Approach | المشكلة والمنهجية</h2>
-            <p><strong>Problems addressed:</strong></p>
-            <ul style="margin: 15px 0 0 25px;">
-                <li><strong>False Positives:</strong> AI marking wrong answers as correct → Solved (0% rate in our test)</li>
-                <li><strong>False Negatives:</strong> AI marking correct answers as wrong → Solved (4.2% rate, one case)</li>
-                <li><strong>Synonym Handling:</strong> "Six" vs "6", "Five" vs "5" → Solved via normalization rules</li>
-                <li><strong>List/Explain Questions:</strong> Matching student items to rubric → Solved via heuristic comparison</li>
-            </ul>
-            <p style="margin-top: 20px;"><strong>Approach:</strong> Two-file system (expected answers + student answers). API calls to Groq (Llama 3.3 70B). Prompt engineering with explicit rules. Post-processing for consistency.</p>
-        </section>
-
-        <!-- Training & Testing -->
-        <section class="section-card">
-            <h2 class="section-title">📊 Training & Testing | التدريب والاختبار</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">24</div>
-                    <div class="stat-label">Test Questions</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">95.8%</div>
-                    <div class="stat-label">Overall Accuracy</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">False Positives</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">1</div>
-                    <div class="stat-label">False Negative</div>
-                </div>
-            </div>
-            <p><strong>Test data:</strong> Mixed types from TM111 course (MCQ, image calculation, audio calculation, binary conversion, pseudocode, cybersecurity lists, algorithm design).<br>
-            <strong>Method:</strong> Each question graded by AI and compared to human-correct answers. Consistency tested with 5 runs.</p>
-        </section>
-
-        <!-- Results -->
-        <section class="section-card">
-            <h2 class="section-title">✅ Results | النتائج</h2>
-            <p>The AI system successfully graded 23 out of 24 questions correctly. The only failure (binary conversion: student answered "44", expected "45") was a genuine student error correctly identified as incorrect — not a system error. All list questions ("Six"/"6", "Five"/"5", "Seven"/"7") were correctly matched. The system maintained perfect consistency across multiple runs.</p>
-        </section>
-
-        <!-- Conclusion -->
-        <section class="section-card">
-            <h2 class="section-title">🎯 Conclusion | الاستنتاج</h2>
-            <p>LLM-based grading is feasible for structured university exam questions (MCQ, lists, calculations) with 95%+ accuracy when combined with prompt engineering and heuristic rules. False positives can be eliminated. Future work includes: PDF/image extraction, scalability to 1000+ students, integration with LMS platforms (Blackboard, Moodle), and Arabic language support.</p>
-        </section>
-
-        <!-- Upload Section -->
-        <section id="upload" class="section-card">
-            <h2 class="section-title">📤 Upload Exam Papers | رفع أوراق الاختبار</h2>
-            <div class="upload-area">
-                <p style="font-size: 1.2rem; margin-bottom: 15px;">📄 Upload Student Answers + Expected Answers</p>
-                <input type="file" id="studentFile" accept=".txt,.csv,.pdf" placeholder="Student answers">
-                <input type="file" id="expectedFile" accept=".txt,.csv,.pdf" placeholder="Expected answers">
-                <br>
-                <button class="btn btn-green" style="margin-top: 20px;" onclick="alert('Grading engine will process files here. Full implementation coming soon.')">Start Grading</button>
-                <p style="margin-top: 20px; font-size: 0.85rem; color: #555;">Supported formats: .txt, .csv (PDF and image OCR coming in Phase 2)</p>
-            </div>
-            <p style="margin-top: 15px;">After upload, the system extracts text, compares to expected answers, and returns grades + feedback. This demo interface will connect to the Groq API backend.</p>
-        </section>
-
-        <!-- Reference / Credit -->
-        <section class="section-card">
-            <h2 class="section-title">📚 References & Credits | المراجع والإسناد</h2>
-            <div class="citation-box">
-                <strong>Cite this research:</strong><br>
-                Alotaibi, K. (2026). <em>KSAIGrading: AI-Powered Exam Grading for Saudi Universities</em>. GitHub. https://github.com/khvledalotaibi/KSAigrading
-            </div>
-            <p style="margin-top: 20px;"><strong>Credits:</strong><br>
-            - Groq Cloud for free LLM API access (Llama 3.3 70B)<br>
-            - Open-source community for Python libraries (OpenAI, python-dotenv)<br>
-            - Arab Open University (AOU) Riyadh for academic context and TM111 course materials (used only as conceptual reference)<br>
-            - سارية الدرعية (Al-Diriyah Mast) as national symbol
-            </p>
-        </section>
-
-        <!-- Code Repository -->
-        <section class="section-card">
-            <h2 class="section-title">💻 Source Code | المصدر المفتوح</h2>
-            <pre>git clone https://github.com/khvledalotaibi/KSAigrading.git
-cd KSAigrading
-pip install -r requirements.txt
-python grade_comparison.py</pre>
-            <a href="https://github.com/khvledalotaibi/KSAigrading" class="btn" style="margin-top: 10px;">🔗 View on GitHub</a>
-        </section>
+        <!-- Single summary card - research condensed -->
+        <div style="margin-top: 30px; padding: 20px; background: #f5f5f5; border-radius: 16px;">
+            <p style="font-weight: bold;">📊 Research Result: 95.8% Accuracy</p>
+            <p>Zero false positives. 1 false negative (genuine student error). Method uses Groq API + prompt engineering.</p>
+            <a href="https://github.com/khvledalotaibi/KSAigrading" style="color: #0a6b3a;">🔗 GitHub Repository →</a>
+        </div>
     </div>
 
     <footer>
-        <p>🇸🇦 مبادرة بحثية ضمن رؤية السعودية 2030 | A Research Initiative Aligned with Saudi Vision 2030</p>
-        <p>© 2026 KSAIGrading | <a href="https://github.com/khvledalotaibi/KSAigrading">GitHub</a> | للاستخدام الأكاديمي فقط | For Academic Use Only</p>
-        <p style="margin-top: 10px; font-size: 0.7rem;">تصميم مستوحى من سارية الدرعية - رمز الوحدة الوطنية | Design inspired by the Al-Diriyah Mast - Symbol of National Unity</p>
+        <p>© 2026 KSAIGrading | <a href="https://github.com/khvledalotaibi/KSAigrading">GitHub</a> | للاستخدام الأكاديمي</p>
     </footer>
 
     <script>
-        // Placeholder for future grading logic
-        console.log("KSAIGrading research website loaded");
+        document.getElementById('gradeBtn').addEventListener('click', async () => {
+            const studentFile = document.getElementById('studentFile').files[0];
+            const expectedFile = document.getElementById('expectedFile').files[0];
+            const resultDiv = document.getElementById('result');
+
+            if (!studentFile || !expectedFile) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '⚠️ Please upload both student answers and expected answers files.';
+                return;
+            }
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '⏳ Processing... Calling Groq API...';
+
+            // Read files
+            const studentText = await studentFile.text();
+            const expectedText = await expectedFile.text();
+
+            // Send to your backend (this requires a simple API endpoint)
+            // For now, demonstrate the workflow
+            resultDiv.innerHTML = `✅ Files loaded: "${studentFile.name}" and "${expectedFile.name}"<br>
+            📡 Ready to grade. Connect to grade_comparison.py backend.<br><br>
+            <strong>Next step:</strong> Run your Python script with these files.`;
+        });
     </script>
 </body>
 </html>
